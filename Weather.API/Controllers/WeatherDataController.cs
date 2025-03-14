@@ -39,7 +39,7 @@ namespace Weather.API.Controllers
         // GET: /api/weather?filterOn=Name&filterQuery=Track&sortBy=Name&isAscending=true&pageNumber=1&pageSize=10
         // GET:https://localhost:7110/api/WeatherData
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAllWeatherForCity([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
             [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
             [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
@@ -62,7 +62,7 @@ namespace Weather.API.Controllers
         //GET: :https://localhost:7110/api/WeatherData/{id}
         [HttpGet]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetWeatherByID([FromRoute] Guid id)
         {
             //get the data from domainmodel-domain model
@@ -78,7 +78,7 @@ namespace Weather.API.Controllers
         // GET SINGLE Weather (Get Region By City)
         //GET: :https://localhost:7110/api/WeatherData/{city}
         [HttpGet("{city}")]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetWeatherByCity([FromRoute] string city)
         {
             //get the data from domainmodel-domain model
@@ -93,9 +93,9 @@ namespace Weather.API.Controllers
 
 
         // POST To fetch and store weather
-        // POST: https://localhost:7110/api/WeatherData
-        [Authorize(Roles = "Writer")]
+        // POST: https://localhost:7110/api/WeatherData    
         [HttpPost]
+        //[Authorize(Roles = "Writer")]
         [ValidateModel]
         public async Task<IActionResult> Create([FromBody] AddWeatherRequestDto addWeatherRequestDto)
         //public async Task<IActionResult> Create(string city)
@@ -141,7 +141,7 @@ namespace Weather.API.Controllers
         [HttpPut]
         [Route("{id:Guid}")]
         [ValidateModel]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWeatherRequestDto updateWeatherRequestDto)
         {
             // Map DTO to Domain Model
@@ -164,7 +164,7 @@ namespace Weather.API.Controllers
         // DELETE: https://localhost:7110/api/WeatherData{id}
         [HttpDelete]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Writer,Reader")]
+        //[Authorize(Roles = "Writer,Reader")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
               var weatherDataDomain = await _weatherDataRepository.DeleteAsync(id);
